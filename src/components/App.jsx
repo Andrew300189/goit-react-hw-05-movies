@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
-import MoviesPage from '../pages/MoviesPage';
-import ReviewsPage from '../pages/ReviewsPage';
+
+const HomePage = lazy(() => import('../pages/HomePage'));
+const MoviesPage = lazy(() => import('../pages/MoviesPage'));
+const ReviewsPage = lazy(() => import('../pages/ReviewsPage'));
 
 function App() {
   return (
@@ -20,18 +21,10 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/movies/:movieId/reviews">
-            <ReviewsPage />
-          </Route>
-          <Route path="/movies/:movieId">
-            <MoviesPage />
-          </Route>
-          <Route path="/movies">
-            <MoviesPage />
-          </Route>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
+          <Route path="/movies/:movieId/reviews" element={<Suspense fallback={<div>Loading...</div>}><ReviewsPage /></Suspense>} />
+          <Route path="/movies/:movieId" element={<Suspense fallback={<div>Loading...</div>}><MoviesPage /></Suspense>} />
+          <Route path="/movies" element={<Suspense fallback={<div>Loading...</div>}><MoviesPage /></Suspense>} />
+          <Route path="/" element={<Suspense fallback={<div>Loading...</div>}><HomePage /></Suspense>} />
           <Navigate to="/" />
         </Routes>
       </div>
