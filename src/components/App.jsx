@@ -1,16 +1,42 @@
-export const App = () => {
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import HomePage from '../pages/HomePage';
+import MoviesPage from '../pages/MoviePage';
+import ReviewsPage from '../pages/ReviewsPage';
+
+function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="/movies">Movies</a>
+            </li>
+          </ul>
+        </nav>
+
+        <Routes>
+          <Route path="/movies/:movieId/reviews">
+            <ReviewsPage />
+          </Route>
+          <Route path="/movies/:movieId">
+            <MoviesPage />
+          </Route>
+          <Route path="/movies">
+            <MoviesPage />
+          </Route>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Navigate to="/" />
+        </Routes>
+      </div>
+    </Router>
   );
-};
+}
+
+export default App;
