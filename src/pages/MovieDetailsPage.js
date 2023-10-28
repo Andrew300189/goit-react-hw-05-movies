@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api';
 import Cast from './Cast';
@@ -11,6 +11,8 @@ const MovieDetailsPage = () => {
   const [cast, setCast] = useState(null);
   const [reviews, setReviews] = useState(null);
   const location = useLocation();
+
+  const goBackPath = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -38,7 +40,7 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <div>
-        <Link to={location.state?.prevPath || '/'}>Go back</Link>
+        <Link to={goBackPath.current}>Go back</Link>
       </div>
       <div className="movie-details">
         <div>
