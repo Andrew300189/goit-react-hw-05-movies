@@ -1,6 +1,4 @@
-// pages/Home.js
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -8,10 +6,15 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await axios.get('/trending/get-trending');
-        setTrendingMovies(response.data.results);
+        const response = await fetch('/trending/get-trending');
+        if (response.ok) {
+          const data = await response.json();
+          setTrendingMovies(data.results);
+        } else {
+          throw new Error('Network response was not ok.');
+        }
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data:', error);
       }
     };
 
@@ -23,6 +26,7 @@ const Home = () => {
       <h1>Trending Movies</h1>
       {trendingMovies.map(movie => (
         <div key={movie.id}>
+          <a href={`/movies/${movie.id}`}>{movie.title}</a>
         </div>
       ))}
     </div>

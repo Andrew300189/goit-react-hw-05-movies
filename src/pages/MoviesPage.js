@@ -1,16 +1,24 @@
-
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const Movies = () => {
-  const history = useNavigate();
+  const [searchResults, setSearchResults] = useState([]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const query = e.target.elements.query.value;
 
     if (query.trim() !== '') {
-      history.push(`/movies?query=${query}`);
+      try {
+        const response = await fetch(`/search/movies?query=${query}`);
+        if (response.ok) {
+          const data = await response.json();
+          setSearchResults(data.results);
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     } else {
       alert('Please enter a search query');
     }
@@ -23,6 +31,13 @@ const Movies = () => {
         <input type="text" name="query" placeholder="Enter movie name" />
         <button type="submit">Search</button>
       </form>
+      <div>
+        {searchResults.map(movie => (
+          <div key={movie.id}>
+            <a href={`/movies/${movie.id}`}>{movie.title}</a>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
