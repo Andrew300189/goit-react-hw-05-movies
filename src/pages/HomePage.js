@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -23,10 +24,14 @@ const Home = () => {
 
   return (
     <div>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+      </div>
       <h1>Trending Movies</h1>
       {trendingMovies.map(movie => (
         <div key={movie.id}>
-          <a href={`/movies/${movie.id}`}>{movie.title}</a>
+          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
         </div>
       ))}
     </div>
