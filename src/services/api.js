@@ -10,24 +10,24 @@ async function fetchFromTMDB(endpoint, queryParams = '') {
 }
 
 export async function getTrendingMovies() {
-  return fetchFromTMDB('trending/movie/day');
+  return fetchFromTMDB('trending/get-trending');
 }
 
 export async function searchMovies(query) {
   const queryParams = `&query=${query}`;
-  return fetchFromTMDB('search/movie', queryParams);
+  return fetchFromTMDB('search/search-movies', queryParams);
 }
 
 export async function getMovieDetails(movieId) {
   const appendToResponse = 'credits,reviews';
   const queryParams = `&append_to_response=${appendToResponse}`;
-  return fetchFromTMDB(`movie/${movieId}`, queryParams);
+  return fetchFromTMDB(`movies/get-movie-details/${movieId}`, queryParams);
 }
 
 export async function getMovieCast(movieId) {
-  return fetchFromTMDB(`movie/${movieId}/credits`);
+  return fetchFromTMDB(`movies/get-movie-credits/${movieId}`);
 }
 
 export async function getMovieReviews(movieId) {
-  return fetchFromTMDB(`movie/${movieId}/reviews`);
+  return fetchFromTMDB(`movies/get-movie-reviews/${movieId}`);
 }

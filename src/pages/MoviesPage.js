@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -34,7 +35,7 @@ const Movies = () => {
       <div>
         {searchResults.map(movie => (
           <div key={movie.id}>
-            <a href={`/movies/${movie.id}`}>{movie.title}</a>
+            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
           </div>
         ))}
       </div>
