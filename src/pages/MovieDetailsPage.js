@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
 import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api';
+import Cast from './Cast';
+import Reviews from './Reviews';
+import { getPoster } from '../services/api';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState(null);
   const [reviews, setReviews] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -31,49 +35,14 @@ const MovieDetailsPage = () => {
     return <div>Loading...</div>;
   }
 
-  const posterUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
-
-  const Cast = ({ cast }) => {
-    return (
-      <div>
-        <h2>Cast</h2>
-        {cast.map(actor => (
-          <div key={actor.id}>
-            <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} />
-            <p>{actor.name}</p>
-            <p>Character: {actor.character}</p>
-          </div>
-        ))}
-      </div>
-    );
-  };
-
-  const Reviews = ({ reviews }) => {
-    return (
-      <div>
-        <h2>Reviews</h2>
-        {reviews.length > 0 ? (
-          reviews.map(review => (
-            <div key={review.id}>
-              <p>Author: {review.author}</p>
-              <p>Content: {review.content}</p>
-            </div>
-          ))
-        ) : (
-          <div>We don't have any reviews for this movie.</div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div>
       <div>
-        <Link to="/">Go back</Link>
+        <Link to={location.state?.prevPath || '/'}>Go back</Link>
       </div>
       <div className="movie-details">
         <div>
-          <img src={posterUrl} alt={movie.title} />
+          <img src={getPoster(movie.poster_path)} alt={movie.title} width={500} />
         </div>
         <div>
           <h1>{movie.title}</h1>
