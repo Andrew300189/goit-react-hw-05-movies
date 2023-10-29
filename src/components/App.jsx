@@ -1,17 +1,16 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import MoviesPage from '../pages/MoviesPage';
 import MovieDetailsPage from '../pages/MovieDetailsPage';
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/movies" component={MoviesPage} />
-        <Route path="/movies/:movieId" component={MovieDetailsPage} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/movies" element={<MoviesPage />} />
+      <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
+    </Routes>
   );
 };
 
