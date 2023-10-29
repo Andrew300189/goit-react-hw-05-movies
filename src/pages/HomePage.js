@@ -7,7 +7,7 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await fetch('/trending/get-trending');
+        const response = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=af286c456a3089045c98b811a363e0ed');
         if (response.ok) {
           const data = await response.json();
           setTrendingMovies(data.results);

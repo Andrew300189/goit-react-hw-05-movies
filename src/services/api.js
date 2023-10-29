@@ -1,5 +1,5 @@
 const API_KEY = 'af286c456a3089045c98b811a363e0ed';
-const BASE_URL = 'https://api.themoviedb.org/';
+const BASE_URL = 'https://api.themoviedb.org/3';
 
 async function fetchFromTMDB(endpoint, queryParams = '') {
   try {

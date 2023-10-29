@@ -27,9 +27,8 @@ const Movies = () => {
 
   return (
     <div>
-      <h1>Movies Page</h1>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="query" placeholder="Enter movie name" />
+        <input type="text" name="query" />
         <button type="submit">Search</button>
       </form>
       <div>
