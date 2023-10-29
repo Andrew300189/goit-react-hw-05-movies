@@ -4,13 +4,10 @@ import { Link } from 'react-router-dom';
 const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const query = e.target.elements.query.value;
-
+  const handleSearch = async (query) => {
     if (query.trim() !== '') {
       try {
-        const response = await fetch(`/search/movies?query=${query}`);
+        const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=af286c456a3089045c98b811a363e0ed&query=${query}`);
         if (response.ok) {
           const data = await response.json();
           setSearchResults(data.results);
@@ -23,6 +20,12 @@ const Movies = () => {
     } else {
       alert('Please enter a search query');
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const query = e.target.elements.query.value;
+    handleSearch(query);
   };
 
   return (

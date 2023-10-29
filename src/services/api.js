@@ -17,28 +17,49 @@ async function fetchFromTMDB(endpoint, queryParams = '') {
   }
 }
 
-export async function getTrendingMovies() {
-  return fetchFromTMDB('trending/get-trending');
-}
-
 export async function searchMovies(query) {
-  const queryParams = `&query=${query}`;
-  return fetchFromTMDB('search/search-movies', queryParams);
+  try {
+    const queryParams = `&query=${query}`;
+    const response = await fetchFromTMDB('search/movie', queryParams);
+    return response;
+  } catch (error) {
+    console.error('Error fetching searchMovies:', error);
+    throw new Error('Search movies error');
+  }
 }
 
 export async function getMovieDetails(movieId) {
-  const appendToResponse = 'credits,reviews';
-  const queryParams = `&append_to_response=${appendToResponse}`;
-  return fetchFromTMDB(`movies/get-movie-details/${movieId}`, queryParams);
+  try {
+    const appendToResponse = 'credits,reviews';
+    const queryParams = `&append_to_response=${appendToResponse}`;
+    const response = await fetchFromTMDB(`movie/${movieId}`, queryParams);
+    return response;
+  } catch (error) {
+    console.error('Error fetching getMovieDetails:', error);
+    throw new Error('Get movie details error');
+  }
 }
 
 export async function getMovieCast(movieId) {
-  return fetchFromTMDB(`movies/get-movie-credits/${movieId}`);
+  try {
+    const response = await fetchFromTMDB(`movie/${movieId}/credits`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching getMovieCast:', error);
+    throw new Error('Get movie cast error');
+  }
 }
 
 export async function getMovieReviews(movieId) {
-  return fetchFromTMDB(`movies/get-movie-reviews/${movieId}`);
+  try {
+    const response = await fetchFromTMDB(`movie/${movieId}/reviews`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching getMovieReviews:', error);
+    throw new Error('Get movie reviews error');
+  }
 }
+
 
 export const getPoster = (url) => {
     const defaultImgUrl = 'https://fakeimg.pl/400x600';
