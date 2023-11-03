@@ -30,6 +30,10 @@ const Movies = () => {
 
   return (
     <div>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+      </div>
       <form onSubmit={handleSubmit}>
         <input type="text" name="query" />
         <button type="submit">Search</button>

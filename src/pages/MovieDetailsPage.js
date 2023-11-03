@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, Route, Routes, useParams, useLocation } from 'react-router-dom';
+import { Link, Route, Routes, useParams, useLocation, Outlet } from 'react-router-dom';
 import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api';
 import Cast from './Cast';
 import Reviews from './Reviews';
@@ -40,6 +40,10 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <div>
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+      </div>
+      <div>
         <Link to={goBackPath.current}>Go back</Link>
       </div>
       <div className="movie-details">
@@ -59,9 +63,11 @@ const MovieDetailsPage = () => {
         <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
       </div>
 
+      <Outlet />
+
       <Routes>
-        <Route path={`/movies/${movieId}/cast`} element={<Cast cast={cast} />} />
-        <Route path={`/movies/${movieId}/reviews`} element={<Reviews reviews={reviews} />} />
+        <Route path="cast" element={<Cast cast={cast} />} />
+        <Route path="reviews" element={<Reviews reviews={reviews} />} />
       </Routes>
     </div>
   );
