@@ -4,6 +4,7 @@ import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api'
 import Cast from './Cast';
 import Reviews from './Reviews';
 import { getPoster } from '../services/api';
+import '../index.css';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -39,38 +40,41 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
+      <div className="container">
+        <Link to="/" className="link-item">Home</Link>
+        <Link to="/movies" className="link-item">Movies</Link>
       </div>
       <div>
-      <Link to={goBackPath.current} state={{ from: location }}>Go back</Link>
+        <Link to={goBackPath.current} state={{ from: location }} className="link-item">Go back</Link>
       </div>
       <div className="movie-details">
         <div>
           <img src={getPoster(movie.poster_path)} alt={movie.title} width={200} />
         </div>
         <div>
-          <h1>{movie.title}</h1>
-          <p>User score: {movie.vote_average * 10}%</p>
-          <p>Overview: {movie.overview}</p>
-          <p>Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
+          <h2 className="movie-title">{movie.title}</h2>
+          <p className="user-score">User score: {movie.vote_average * 10}%</p>
+          <p className="overview">Overview: {movie.overview}</p>
+          <p className="genres">Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
         </div>
       </div>
-
-      <div>
-        <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+  
+      <div className="additional-info">
+        <h3>Additional information</h3>
+        <div className="info-divider"></div>
+        <Link to={`/movies/${movieId}/cast`} className="info-link">Cast</Link>
+        <Link to={`/movies/${movieId}/reviews`} className="info-link">Reviews</Link>
+        <div className="info-divider"></div>
       </div>
-
+  
       <Outlet />
-
+  
       <Routes>
         <Route path="cast" element={<Cast cast={cast} />} />
         <Route path="reviews" element={<Reviews reviews={reviews} />} />
       </Routes>
     </div>
-  );
+  );  
 };
 
 export default MovieDetailsPage;

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -30,21 +31,23 @@ const Movies = () => {
 
   return (
     <div>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
+      <div className="container">
+        <Link to="/" className="link-item">Home</Link>
+        <Link to="/movies" className="link-item">Movies</Link>
       </div>
       <form onSubmit={handleSubmit}>
         <input type="text" name="query" />
         <button type="submit">Search</button>
       </form>
-      <div>
+      <ul>
         {searchResults.map(movie => (
-          <div key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          </div>
+          <li key={movie.id} className="movies">
+            <Link to={`/movies/${movie.id}`}>
+              {movie.title}
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

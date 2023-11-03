@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../index.css';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -23,19 +24,23 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
       <div>
-        <Link to="/">Home</Link>
-        <Link to="/movies">Movies</Link>
-      </div>
-      <h1>Trending Movies</h1>
-      {trendingMovies.map(movie => (
-        <div key={movie.id}>
-          <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+        <div className="container">
+          <Link to="/" className="link-item">Home</Link>
+          <Link to="/movies" className="link-item">Movies</Link>
         </div>
-      ))}
-    </div>
-  );
-};
+        <div>
+          <h1>Trending today</h1>
+          {trendingMovies.map(movie => (
+            <div key={movie.id} className="movies">
+              <Link to={`/movies/${movie.id}`}>
+                {movie.title}
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    );    
+  };
 
 export default Home;
