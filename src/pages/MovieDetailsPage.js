@@ -44,7 +44,7 @@ const MovieDetailsPage = () => {
         <Link to="/movies">Movies</Link>
       </div>
       <div>
-        <Link to={goBackPath.current}>Go back</Link>
+      <Link to={goBackPath.current} state={{ from: location }}>Go back</Link>
       </div>
       <div className="movie-details">
         <div>
