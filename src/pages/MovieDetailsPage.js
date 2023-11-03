@@ -54,8 +54,8 @@ const MovieDetailsPage = () => {
         <div>
           <h2 className="movie-title">{movie.title}</h2>
           <p className="user-score">User score: {movie.vote_average * 10}%</p>
-          <p className="overview">Overview: {movie.overview}</p>
-          <p className="genres">Genres: {movie.genres.map(genre => genre.name).join(', ')}</p>
+          <p className="overview">Overview {movie.overview}</p>
+          <p className="genres">Genres {movie.genres.map(genre => genre.name).join(', ')}</p>
         </div>
       </div>
   
