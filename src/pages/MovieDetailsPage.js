@@ -51,30 +51,40 @@ const MovieDetailsPage = () => {
         <div>
           <img src={getPoster(movie.poster_path)} alt={movie.title} width={200} />
         </div>
-        <div>
+        <div className="movie-info">
           <h2 className="movie-title">{movie.title}</h2>
           <p className="user-score">User score: {movie.vote_average * 10}%</p>
-          <p className="overview">Overview {movie.overview}</p>
-          <p className="genres">Genres {movie.genres.map(genre => genre.name).join(', ')}</p>
+          <h3 className="info-label">Overview</h3>
+          <p className="overview">{movie.overview}</p>
+          <h4 className="info-label">Genres</h4>
+          <p className="genres">{movie.genres.map(genre => genre.name).join(', ')}</p>
         </div>
       </div>
-  
+
       <div className="additional-info">
-        <h3>Additional information</h3>
-        <div className="info-divider"></div>
-        <Link to={`/movies/${movieId}/cast`} className="info-link">Cast</Link>
-        <Link to={`/movies/${movieId}/reviews`} className="info-link">Reviews</Link>
-        <div className="info-divider"></div>
+        <p>Additional information</p>
+        <ul className="info-list">
+          <li>
+            <Link to={`/movies/${movieId}/cast`} className="info-link">
+              Cast
+            </Link>
+          </li>
+          <li>
+            <Link to={`/movies/${movieId}/reviews`} className="info-link">
+              Reviews
+            </Link>
+          </li>
+        </ul>
       </div>
-  
+
       <Outlet />
-  
+
       <Routes>
         <Route path="cast" element={<Cast cast={cast} />} />
         <Route path="reviews" element={<Reviews reviews={reviews} />} />
       </Routes>
     </div>
-  );  
+  );
 };
 
 export default MovieDetailsPage;

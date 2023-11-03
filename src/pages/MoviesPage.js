@@ -35,9 +35,9 @@ const Movies = () => {
         <Link to="/" className="link-item">Home</Link>
         <Link to="/movies" className="link-item">Movies</Link>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="query" />
-        <button type="submit">Search</button>
+      <form  className="search-form" onSubmit={handleSubmit}>
+       <input type="text" name="query" />
+       <button type="submit">Search</button>
       </form>
       <ul>
         {searchResults.map(movie => (
