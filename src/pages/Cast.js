@@ -24,7 +24,7 @@ const Cast = () => {
       <h3>Cast</h3>
       {cast.map(actor => (
         <div key={actor.id}>
-          <img src={getPoster(actor.profile_path)} alt={actor.name} width={50} />
+          <img src={getPoster(actor.profile_path)} alt={actor.name} width={100} />
           <p>{actor.name}</p>
           <p>Character: {actor.character}</p>
         </div>

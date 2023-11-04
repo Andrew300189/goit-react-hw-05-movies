@@ -7,8 +7,7 @@ const Movies = () => {
 const [query, setQuery]=useSearchParams();
 const searchValue=query.get('query');
 const location = useLocation(); 
-console.log(searchValue);
-console.log(query);
+
 useEffect(()=>{
   const handleSearch = async (query) => {
     if (searchValue.trim() !== '') {
@@ -32,7 +31,6 @@ useEffect(()=>{
   const handleSubmit = (e) => {
     e.preventDefault();
     const query = e.target.elements.query.value;
-    // handleSearch(query);
     setQuery({query});
   };
 
