@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, Route, Routes, useParams, useLocation, Outlet } from 'react-router-dom';
+import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
 import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api';
-import Cast from './Cast';
-import Reviews from './Reviews';
 import { getPoster } from '../services/api';
 import '../index.css';
 
