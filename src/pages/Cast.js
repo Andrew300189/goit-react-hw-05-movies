@@ -21,7 +21,7 @@ const Cast = () => {
   console.log(cast);
   return (
     <div>
-      <h2>Cast fdjlsjflsd</h2>
+      <h3>Cast</h3>
       {cast.map(actor => (
         <div key={actor.id}>
           <img src={getPoster(actor.profile_path)} alt={actor.name} width={50} />
