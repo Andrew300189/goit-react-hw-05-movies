@@ -78,11 +78,6 @@ const MovieDetailsPage = () => {
       </div>
 
       <Outlet />
-
-      <Routes>
-        <Route path="cast" element={<Cast cast={cast} />} />
-        <Route path="reviews" element={<Reviews reviews={reviews} />} />
-      </Routes>
     </div>
   );
 };
