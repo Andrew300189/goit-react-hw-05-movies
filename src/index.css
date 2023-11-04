@@ -67,3 +67,11 @@ code {
   width: 500px;
   margin-top: 10px;
 }
+
+.back-button{
+  margin-left: 30px;
+  font-size: 15px;
+  color: blue;
+  font-weight: 500;
+
+}
