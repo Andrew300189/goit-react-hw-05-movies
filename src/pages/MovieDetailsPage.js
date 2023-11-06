@@ -7,10 +7,7 @@ import '../index.css';
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
-  const [cast, setCast] = useState(null);
-  const [reviews, setReviews] = useState(null);
   const location = useLocation();
-
   const goBackPath = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
@@ -19,11 +16,7 @@ const MovieDetailsPage = () => {
         const movieDetails = await getMovieDetails(movieId);
         setMovie(movieDetails);
 
-        const castData = await getMovieCast(movieId);
-        setCast(castData);
-
-        const reviewsData = await getMovieReviews(movieId);
-        setReviews(reviewsData);
+        
       } catch (error) {
         console.error('Error', error);
       }
@@ -32,7 +25,7 @@ const MovieDetailsPage = () => {
     fetchMovieDetails();
   }, [movieId]);
 
-  if (!movie || !cast || reviews === null) {
+  if (!movie) {
     return <div>Loading...</div>;
   }
 
