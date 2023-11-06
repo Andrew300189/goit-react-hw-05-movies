@@ -36,10 +36,6 @@ useEffect(()=>{
 
   return (
     <div>
-      <div className="container">
-        <Link to="/" className="link-item">Home</Link>
-        <Link to="/movies" className="link-item">Movies</Link>
-      </div>
       <form  className="search-form" onSubmit={handleSubmit}>
        <input type="text" name="query" />
        <button type="submit">Search</button>

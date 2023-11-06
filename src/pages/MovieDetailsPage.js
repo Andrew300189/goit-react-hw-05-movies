@@ -38,10 +38,6 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <div className="container">
-        <Link to="/" className="link-item">Home</Link>
-        <Link to="/movies" className="link-item">Movies</Link>
-      </div>
       <div>
         <Link to={goBackPath.current} state={{ from: location }} className="back-button">Go back</Link>
       </div>

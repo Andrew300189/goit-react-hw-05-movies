@@ -25,10 +25,6 @@ const Home = () => {
 
   return (
       <div>
-        <div className="container">
-          <Link to="/" className="link-item">Home</Link>
-          <Link to="/movies" className="link-item">Movies</Link>
-        </div>
         <div>
           <h1>Trending today</h1>
           {trendingMovies.map(movie => (
