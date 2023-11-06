@@ -15,8 +15,6 @@ const MovieDetailsPage = () => {
       try {
         const movieDetails = await getMovieDetails(movieId);
         setMovie(movieDetails);
-
-        
       } catch (error) {
         console.error('Error', error);
       }

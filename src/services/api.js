@@ -19,12 +19,16 @@ async function fetchFromTMDB(endpoint, queryParams = '') {
 
 export async function searchMovies(query) {
   try {
-    const queryParams = `&query=${query}`;
-    const response = await fetchFromTMDB('search/movie', queryParams);
-    return response;
+    if (query.trim() !== '') {
+      const queryParams = `&query=${query}`;
+      const data = await fetchFromTMDB('search/movie', queryParams);
+      return data.results;
+    } else {
+      throw new Error('Please enter a search query');
+    }
   } catch (error) {
-    console.error('Error fetching searchMovies:', error);
-    throw new Error('Search movies error');
+    console.error('Error fetching data:', error);
+    return [];
   }
 }
 

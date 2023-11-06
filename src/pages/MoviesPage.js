@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import '../index.css';
+import { searchMovies } from 'services/api';
 
 const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
@@ -8,17 +9,12 @@ const [query, setQuery]=useSearchParams();
 const searchValue=query.get('query');
 const location = useLocation(); 
 
-useEffect(()=>{
+useEffect(() => {
   const handleSearch = async (query) => {
-    if (searchValue.trim() !== '') {
+    if (query && query.trim() !== '') {
       try {
-        const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=af286c456a3089045c98b811a363e0ed&query=${query}`);
-        if (response.ok) {
-          const data = await response.json();
-          setSearchResults(data.results);
-        } else {
-          throw new Error('Network response was not ok.');
-        }
+        const data = await searchMovies(query);
+        setSearchResults(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -27,7 +23,7 @@ useEffect(()=>{
     }
   };
   handleSearch(searchValue);
-},[searchValue])
+}, [searchValue])
   const handleSubmit = (e) => {
     e.preventDefault();
     const query = e.target.elements.query.value;
