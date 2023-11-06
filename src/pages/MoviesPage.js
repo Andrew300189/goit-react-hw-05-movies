@@ -4,31 +4,38 @@ import '../index.css';
 import { searchMovies } from 'services/api';
 
 const Movies = () => {
-  const [searchResults, setSearchResults] = useState([]);
+const [searchResults, setSearchResults] = useState([]);
 const [query, setQuery]=useSearchParams();
 const searchValue=query.get('query');
 const location = useLocation(); 
 
 useEffect(() => {
   const handleSearch = async (query) => {
-    if (query && query.trim() !== '') {
+    if (query !== null && query.trim() !== '') {
       try {
         const data = await searchMovies(query);
         setSearchResults(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    } else {
-      alert('Please enter a search query');
     }
   };
-  handleSearch(searchValue);
-}, [searchValue])
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const query = e.target.elements.query.value;
-    setQuery({query});
-  };
+
+  if (searchValue !== null && searchValue.trim() !== '') {
+    handleSearch(searchValue);
+  }
+}, [searchValue]);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const query = e.target.elements.query.value;
+  
+  if (query.trim() !== '') {
+    setQuery({ query });
+  } else {
+    alert('Please enter a search query');
+  }
+};
 
   return (
     <div>

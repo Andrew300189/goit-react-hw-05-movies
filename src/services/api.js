@@ -24,7 +24,7 @@ export async function searchMovies(query) {
       const data = await fetchFromTMDB('search/movie', queryParams);
       return data.results;
     } else {
-      throw new Error('Please enter a search query');
+      return [];
     }
   } catch (error) {
     console.error('Error fetching data:', error);
