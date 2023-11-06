@@ -17,6 +17,21 @@ async function fetchFromTMDB(endpoint, queryParams = '') {
   }
 }
 
+export async function getTrendingMovies() {
+  try {
+    const response = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=af286c456a3089045c98b811a363e0ed');
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error('Network response was not ok.');
+    }
+  } catch (error) {
+    console.error('Error fetching trending movies:', error);
+    throw new Error('Get trending movies error');
+  }
+}
+
 export async function searchMovies(query) {
   try {
     if (query.trim() !== '') {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import '../index.css';
+import { getTrendingMovies } from 'services/api';
 
 const Home = () => {
   const [trendingMovies, setTrendingMovies] = useState([]);
@@ -8,18 +9,13 @@ const Home = () => {
   useEffect(() => {
     const fetchTrendingMovies = async () => {
       try {
-        const response = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=af286c456a3089045c98b811a363e0ed');
-        if (response.ok) {
-          const data = await response.json();
-          setTrendingMovies(data.results);
-        } else {
-          throw new Error('Network response was not ok.');
-        }
+        const data = await getTrendingMovies();
+        setTrendingMovies(data.results);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchTrendingMovies();
   }, []);
 
