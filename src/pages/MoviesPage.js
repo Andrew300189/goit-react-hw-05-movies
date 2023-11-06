@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import '../index.css';
 
 const Movies = () => {
@@ -43,9 +43,9 @@ useEffect(()=>{
       <ul>
         {searchResults.map(movie => (
           <li key={movie.id} className="movies">
-            <Link to={`/movies/${movie.id}`}state={{from:location}}>
+            <NavLink to={`/movies/${movie.id}`}state={{from:location}}>
               {movie.title}
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>

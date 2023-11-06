@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Route, Routes, NavLink } from 'react-router-dom';
 import HomePage from '../pages/HomePage';
 import MoviesPage from '../pages/MoviesPage';
 import MovieDetailsPage from '../pages/MovieDetailsPage';
@@ -9,8 +9,8 @@ import Reviews from 'pages/Reviews';
 const Navigation = () => {
   return (
     <div className="container">
-      <Link to="/" className="link-item">Home</Link>
-      <Link to="/movies" className="link-item">Movies</Link>
+      <NavLink to="/" className="link-item">Home</NavLink>
+      <NavLink to="/movies" className="link-item">Movies</NavLink>
     </div>
   );
 };

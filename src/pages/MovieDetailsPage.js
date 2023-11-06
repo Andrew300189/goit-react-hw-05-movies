@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Link, useParams, useLocation, Outlet } from 'react-router-dom';
-import { getMovieDetails, getMovieCast, getMovieReviews } from '../services/api';
+import { useParams, useLocation, Outlet, NavLink } from 'react-router-dom';
+import { getMovieDetails } from '../services/api';
 import { getPoster } from '../services/api';
 import '../index.css';
 
@@ -32,7 +32,7 @@ const MovieDetailsPage = () => {
   return (
     <div>
       <div>
-        <Link to={goBackPath.current} state={{ from: location }} className="back-button">Go back</Link>
+        <NavLink to={goBackPath.current} state={{ from: location }} className="back-button">Go back</NavLink>
       </div>
       <div className="movie-details">
         <div>
@@ -52,14 +52,14 @@ const MovieDetailsPage = () => {
         <p>Additional information</p>
         <ul className="info-list">
           <li>
-            <Link to={`/movies/${movieId}/cast`} className="info-link">
+            <NavLink to={`cast`} className="info-link">
               Cast
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to={`/movies/${movieId}/reviews`} className="info-link">
+            <NavLink to={`reviews`} className="info-link">
               Reviews
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>

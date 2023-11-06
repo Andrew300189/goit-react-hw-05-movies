@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../index.css';
 
 const Home = () => {
@@ -29,9 +29,9 @@ const Home = () => {
           <h1>Trending today</h1>
           {trendingMovies.map(movie => (
             <div key={movie.id} className="movies">
-              <Link to={`/movies/${movie.id}`}>
+              <NavLink to={`/movies/${movie.id}`}>
                 {movie.title}
-              </Link>
+              </NavLink>
             </div>
           ))}
         </div>
